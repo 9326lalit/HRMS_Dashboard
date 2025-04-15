@@ -34,7 +34,7 @@ const Leave: React.FC = () => {
   });
 
   const fetchLeaves = async () => {
-    const res = await axios.get('http://localhost:5000/api/leaves/getall');
+    const res = await axios.get('https://hrmsbackend-27mf.onrender.com/api/leaves/getall');
     setLeaves(res.data);
   };
 
@@ -43,7 +43,7 @@ const Leave: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`http://localhost:5000/api/leaves/${id}`);
+    await axios.delete(`https://hrmsbackend-27mf.onrender.com/api/leaves/${id}`);
     fetchLeaves();
   };
 
@@ -75,9 +75,9 @@ const Leave: React.FC = () => {
 
   const handleSubmit = async () => {
     if (editingLeave) {
-      await axios.put(`http://localhost:5000/api/leaves/${editingLeave._id}`, formData);
+      await axios.put(`https://hrmsbackend-27mf.onrender.com/api/leaves/${editingLeave._id}`, formData);
     } else {
-      await axios.post('http://localhost:5000/api/leaves/create', formData);
+      await axios.post('https://hrmsbackend-27mf.onrender.com/api/leaves/create', formData);
     }
     setShowModal(false);
     fetchLeaves();

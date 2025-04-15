@@ -28,7 +28,7 @@ const Employee: React.FC = () => {
 
   const fetchEmployees = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/employees/getall');
+      const res = await axios.get('https://hrmsbackend-27mf.onrender.com/api/employees/getall');
       setEmployees(res.data);
     } catch (err) {
       console.error('Error fetching employees:', err);
@@ -48,7 +48,7 @@ const Employee: React.FC = () => {
 
   const deleteEmployee = async (email: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/employees/${email}`);
+      await axios.delete(`https://hrmsbackend-27mf.onrender.com/api/employees/${email}`);
       fetchEmployees();
     } catch (err) {
       console.error('Error deleting employee:', err);
@@ -58,9 +58,9 @@ const Employee: React.FC = () => {
   const handleSubmit = async () => {
     try {
       if (editingEmployee) {
-        await axios.put(`http://localhost:5000/api/employees/${editingEmployee.email}`, form);
+        await axios.put(`https://hrmsbackend-27mf.onrender.com/api/employees/${editingEmployee.email}`, form);
       } else {
-        await axios.post('http://localhost:5000/api/employees/create', form);
+        await axios.post('https://hrmsbackend-27mf.onrender.com/api/employees/create', form);
       }
 
       setForm({

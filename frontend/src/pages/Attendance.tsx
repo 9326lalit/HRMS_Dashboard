@@ -32,7 +32,7 @@ const Attendance: React.FC = () => {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/attendance/getall`);
+        const response = await axios.get(`https://hrmsbackend-27mf.onrender.com/api/attendance/getall`);
         setRecords(response.data);
       } catch (error) {
         console.error('Error fetching attendance data:', error);
@@ -75,7 +75,7 @@ const Attendance: React.FC = () => {
         );
       } else {
         // Add new record
-        const response = await axios.post(`http://localhost:5000/api/attendance/create`, formData);
+        const response = await axios.post(`https://hrmsbackend-27mf.onrender.com/api/attendance/create`, formData);
         setRecords([...records, response.data]);
       }
   

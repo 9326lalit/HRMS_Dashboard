@@ -20,7 +20,7 @@ export default function LoginPage() {
 
     try {
       // API call to the backend for login
-      const response = await axios.post("http://localhost:5000/api/users/login", { email, password })
+      const response = await axios.post("https://hrmsbackend-27mf.onrender.com/api/users/login", { email, password })
 
       // Store the JWT token in localStorage
       localStorage.setItem("token", response.data.token)

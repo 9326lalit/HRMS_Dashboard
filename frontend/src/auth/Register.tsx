@@ -137,7 +137,7 @@ export default function RegisterPage() {
 
     try {
       // Send data to the backend API for registration
-      const response = await axios.post("http://localhost:5000/api/users/register", userData);
+      const response = await axios.post("https://hrmsbackend-27mf.onrender.com/api/users/register", userData);
       if (response.data.success) {
         navigate("/login"); // Redirect to login page on success
       }

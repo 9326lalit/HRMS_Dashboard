@@ -11,7 +11,7 @@ type Candidate = {
   experience: string
 }
 
-const API_BASE = 'http://localhost:5000/api/candidates'
+const API_BASE = 'https://hrmsbackend-27mf.onrender.com/api/candidates'
 
 export default function CandidatesPage() {
   const [candidates, setCandidates] = useState<Candidate[]>([])
