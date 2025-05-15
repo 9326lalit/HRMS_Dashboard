@@ -15,7 +15,7 @@ const navItems = [
   {
     section: "Recruitment",
     links: [
-      { name: "Candidates", icon: UserPlus, path: "/candidates" },
+      { name: "Candidates", icon: UserPlus, path: "/" },
     ],
   },
   {

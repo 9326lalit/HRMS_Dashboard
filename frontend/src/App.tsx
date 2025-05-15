@@ -107,9 +107,13 @@ export default function App() {
 
           {/* App pages with sidebar (Protected Routes) */}
           <Route
-            path="/candidates"
+            path="/"
             element={<ProtectedRoute><CandidatesPage /></ProtectedRoute>}
           />
+          {/* <Route
+            path="/candidates"
+            element={<ProtectedRoute><CandidatesPage /></ProtectedRoute>}
+          /> */}
           <Route
             path="/employees"
             element={<ProtectedRoute><Employee /></ProtectedRoute>}
