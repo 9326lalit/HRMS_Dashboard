@@ -39,7 +39,7 @@ export default function LoginPage() {
         {/* Left Section */}
         <div className="bg-purple-800 text-white flex flex-col justify-center items-center px-10 py-16">
           <img
-            src="/dashboard-preview.png"
+            src="https://jerp.jmrinfotech.com/images/hrms.jpg"
             alt="Dashboard Preview"
             className="rounded-lg shadow-lg mb-8"
           />
