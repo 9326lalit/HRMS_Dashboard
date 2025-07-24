@@ -1,5 +1,3 @@
-// src/components/Sidebar.tsx
-import { Input } from "@/components/ui/input"
 import { Link, useLocation } from "react-router-dom"
 import {
   Users,
@@ -9,7 +7,6 @@ import {
   Search,
   UserPlus
 } from "lucide-react"
-import clsx from "clsx"
 
 const navItems = [
   {
@@ -38,40 +35,96 @@ export default function Sidebar() {
   const { pathname } = useLocation()
 
   return (
-    <aside className="w-64 h-screen border-r bg-white p-4 space-y-6 text-sm">
-      <div className="flex items-center space-x-2 font-bold text-purple-700">
-        <div className="w-6 h-6 border-2 border-purple-700 rounded-sm" />
+    <aside style={{
+      width: "260px",
+      height: "100vh",
+      borderRight: "1px solid #e5e7eb",
+      background: "#fff",
+      padding: "24px 18px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "28px",
+      fontSize: "15px"
+    }}>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        fontWeight: "bold",
+        color: "#7c3aed"
+      }}>
+        <div style={{
+          width: "28px",
+          height: "28px",
+          border: "2px solid #7c3aed",
+          borderRadius: "6px"
+        }} />
         <span>TECHWIZLALIT</span>
       </div>
 
-      <div className="relative">
-        <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-500" />
-        <Input
+      <div style={{ position: "relative" }}>
+        <Search style={{
+          position: "absolute",
+          left: "14px",
+          top: "12px",
+          width: "18px",
+          height: "18px",
+          color: "#6b7280"
+        }} />
+        <input
           placeholder="Search"
-          className="pl-9 py-2 text-sm rounded-full bg-gray-100"
+          style={{
+            paddingLeft: "38px",
+            paddingTop: "8px",
+            paddingBottom: "8px",
+            borderRadius: "999px",
+            background: "#f3f4f6",
+            border: "none",
+            fontSize: "15px",
+            width: "100%"
+          }}
         />
       </div>
 
       {navItems.map((section) => (
         <div key={section.section}>
-          <div className="text-gray-500 uppercase text-xs font-semibold px-2 mb-2">
+          <div style={{
+            color: "#6b7280",
+            textTransform: "uppercase",
+            fontSize: "12px",
+            fontWeight: 600,
+            paddingLeft: "8px",
+            marginBottom: "8px"
+          }}>
             {section.section}
           </div>
-          <div className="space-y-1">
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             {section.links.map((item) => {
               const isActive = pathname === item.path
               return (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={clsx(
-                    "flex items-center px-3 py-2 rounded-lg text-sm font-medium transition",
-                    isActive
-                      ? "bg-purple-100 text-purple-700"
-                      : "text-gray-700 hover:bg-gray-100"
-                  )}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "10px 14px",
+                    borderRadius: "8px",
+                    fontSize: "15px",
+                    fontWeight: 500,
+                    color: isActive ? "#7c3aed" : "#374151",
+                    background: isActive ? "#ede9fe" : "transparent",
+                    textDecoration: "none",
+                    transition: "background 0.2s, color 0.2s"
+                  }}
+                  onMouseOver={e => {
+                    if (!isActive) (e.currentTarget as HTMLElement).style.background = "#f3f4f6"
+                  }}
+                  onMouseOut={e => {
+                    if (!isActive) (e.currentTarget as HTMLElement).style.background = "transparent"
+                  }}
                 >
-                  <item.icon className="mr-2 h-4 w-4" />
+                  <item.icon style={{ marginRight: "8px", width: "18px", height: "18px" }} />
                   {item.name}
                 </Link>
               )

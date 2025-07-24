@@ -1,0 +1,239 @@
+.candidate-container {
+  padding: 32px;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+.candidate-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.candidate-filters {
+  display: flex;
+  gap: 12px;
+}
+
+.candidate-select {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.candidate-select:focus {
+  border-color: #7c3aed;
+  outline: none;
+}
+
+.candidate-search-add {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.candidate-input {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #fff;
+  transition: border 0.2s;
+  margin-bottom: 0;
+}
+
+.candidate-input:focus {
+  border-color: #7c3aed;
+  outline: none;
+}
+
+.candidate-add-btn {
+  background: linear-gradient(90deg, #5000d9 60%, #5000d9 100%);
+  color: #fff;
+  padding: 9px 22px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.candidate-add-btn:hover {
+  background: linear-gradient(90deg, #5000d9 60%, #5000d9 100%);
+}
+
+.candidate-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(60, 72, 88, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.candidate-table th,
+.candidate-table td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.candidate-table th {
+  background: linear-gradient(90deg, #5000d9 60%, #5000d9 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.candidate-table tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s;
+}
+
+.candidate-table tr:hover {
+  background: #f3f4f6;
+}
+
+.candidate-action-cell {
+  position: relative;
+}
+
+.candidate-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6b7280;
+  padding: 4px;
+}
+
+.candidate-action-menu {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(60, 72, 88, 0.12);
+  border-radius: 8px;
+  min-width: 150px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.candidate-menu-item {
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.candidate-menu-item:hover {
+  background: #f3f4f6;
+}
+
+.candidate-menu-delete {
+  color: #e11d48;
+}
+
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-badge.new {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-badge.selected {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.candidate-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(60, 72, 88, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.candidate-modal {
+  background: #fff;
+  padding: 32px 28px 24px 28px;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(60, 72, 88, 0.18);
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.candidate-modal h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #7c3aed;
+}
+
+.candidate-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.candidate-cancel-btn {
+  background: #e5e7eb;
+  color: #374151;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.candidate-cancel-btn:hover {
+  background: #d1d5db;
+}
+
+.candidate-save-btn {
+  background: linear-gradient(90deg, #7c3aed 60%, #a78bfa 100%);
+  color: #fff;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.candidate-save-btn:hover {
+  background: linear-gradient(90deg, #5b21b6 60%, #a78bfa 100%);
+}

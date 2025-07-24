@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Employee.css';
 
 type EmployeeType = {
   name: string;
@@ -81,9 +82,9 @@ const Employee: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Employees</h2>
+    <div className="employee-container">
+      <div className="employee-header">
+        <h2>Employees</h2>
         <button
           onClick={() => {
             setEditingEmployee(null);
@@ -98,51 +99,51 @@ const Employee: React.FC = () => {
             });
             setShowModal(true);
           }}
-          className="bg-purple-700 text-white px-4 py-2 rounded-md"
+          className="employee-add-btn"
         >
           + Add
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-xl shadow-md">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-purple-900 text-white">
+      <div className="employee-table-wrapper">
+        <table className="employee-table">
+          <thead>
             <tr>
-              <th className="px-4 py-3 text-left">Profile</th>
-              <th className="px-4 py-3 text-left">Name</th>
-              <th className="px-4 py-3 text-left">Email</th>
-              <th className="px-4 py-3 text-left">Phone</th>
-              <th className="px-4 py-3 text-left">Position</th>
-              <th className="px-4 py-3 text-left">Department</th>
-              <th className="px-4 py-3 text-left">Joining Date</th>
-              <th className="px-4 py-3 text-left">Action</th>
+              <th>Profile</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Position</th>
+              <th>Department</th>
+              <th>Joining Date</th>
+              <th>Action</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-100">
+          <tbody>
             {employees.map((emp, index) => (
               <tr key={index}>
-                <td className="px-4 py-3">
-                  <img src={emp.image} alt={emp.name} className="w-10 h-10 rounded-full" />
+                <td>
+                  <img src={emp.image} alt={emp.name} className="employee-avatar" />
                 </td>
-                <td className="px-4 py-3">{emp.name}</td>
-                <td className="px-4 py-3">{emp.email}</td>
-                <td className="px-4 py-3">{emp.phone}</td>
-                <td className="px-4 py-3">{emp.position}</td>
-                <td className="px-4 py-3">{emp.department}</td>
-                <td className="px-4 py-3">{emp.joiningDate}</td>
-                <td className="px-4 py-3 relative">
-                  <button onClick={() => setDropdownIndex(index)}>⋮</button>
+                <td>{emp.name}</td>
+                <td>{emp.email}</td>
+                <td>{emp.phone}</td>
+                <td>{emp.position}</td>
+                <td>{emp.department}</td>
+                <td>{emp.joiningDate}</td>
+                <td className="employee-action-cell">
+                  <button className="employee-action-btn" onClick={() => setDropdownIndex(index)}>⋮</button>
                   {dropdownIndex === index && (
-                    <div className="absolute right-0 mt-2 w-32 bg-white border rounded shadow z-50">
+                    <div className="employee-action-menu">
                       <button
                         onClick={() => openEdit(emp)}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        className="employee-menu-item"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => deleteEmployee(emp.email)}
-                        className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+                        className="employee-menu-item employee-menu-delete"
                       >
                         Delete
                       </button>
@@ -157,9 +158,9 @@ const Employee: React.FC = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-blue bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-md w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4">
+        <div className="employee-modal-overlay">
+          <div className="employee-modal">
+            <h3>
               {editingEmployee ? 'Edit Employee' : 'Add Employee'}
             </h3>
             {['name', 'email', 'phone', 'position', 'department', 'joiningDate'].map((field) => (
@@ -168,19 +169,19 @@ const Employee: React.FC = () => {
                 placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                 value={form[field as keyof EmployeeType]}
                 onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                className="border w-full mb-3 px-3 py-2 rounded"
+                className="employee-input"
               />
             ))}
-            <div className="flex justify-end gap-3">
+            <div className="employee-modal-actions">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 border rounded"
+                className="employee-cancel-btn"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSubmit}
-                className="px-4 py-2 bg-purple-700 text-white rounded"
+                className="employee-save-btn"
               >
                 {editingEmployee ? 'Update' : 'Add'}
               </button>

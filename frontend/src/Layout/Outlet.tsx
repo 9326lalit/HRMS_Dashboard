@@ -1,11 +1,11 @@
-import Sidebar from "@/components/Sidebar"
 import { Outlet } from "react-router-dom"
+import Sidebar from "./Sidebar"
 
 export default function AppLayout() {
   return (
-    <div className="flex">
+    <div style={{ display: "flex" }}>
       <Sidebar />
-      <main className="flex-1 p-6">
+      <main style={{ flex: 1, padding: "24px" }}>
         <Outlet />
       </main>
     </div>

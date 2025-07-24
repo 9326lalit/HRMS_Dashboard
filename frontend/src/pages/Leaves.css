@@ -1,0 +1,318 @@
+.leaves-container {
+  padding: 32px;
+  background: #f7f8fa;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.leaves-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+
+.leaves-filters {
+  display: flex;
+  gap: 12px;
+}
+
+.leaves-select,
+.leaves-input {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.leaves-select:focus,
+.leaves-input:focus {
+  border-color: #7c3aed;
+  outline: none;
+}
+
+.leaves-add-btn {
+  background: linear-gradient(90deg, #5000d9 60%, #5000d9 100%);
+  color: #fff;
+  padding: 9px 22px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.leaves-add-btn:hover {
+  background: linear-gradient(90deg, #5b21b6 60%, #a78bfa 100%);
+}
+
+.leaves-main {
+  display: flex;
+  gap: 32px;
+}
+
+.leaves-table-wrapper {
+  flex: 1;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(60, 72, 88, 0.08);
+}
+
+.leaves-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.leaves-table th,
+.leaves-table td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.leaves-table th {
+  background: linear-gradient(90deg, #5000d9 60%, #5000d9 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.leaves-table tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s;
+}
+
+.leaves-table tr:hover {
+  background: #f3f4f6;
+}
+
+.leaves-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #a78bfa;
+}
+
+.leaves-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.leaves-role {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.leaves-status {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: #e5e7eb;
+  color: #374151;
+  display: inline-block;
+}
+
+.leaves-status.approved {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.leaves-status.pending {
+  background: #fef9c3;
+  color: #b45309;
+}
+
+.leaves-action-cell {
+  position: relative;
+}
+
+.leaves-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6b7280;
+  padding: 4px;
+}
+
+.leaves-action-menu {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(60, 72, 88, 0.12);
+  border-radius: 8px;
+  min-width: 140px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaves-menu-item {
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaves-menu-item:hover {
+  background: #f3f4f6;
+}
+
+.leaves-menu-delete {
+  color: #e11d48;
+}
+
+.leaves-calendar-section {
+  width: 320px;
+  min-width: 260px;
+}
+
+.leaves-calendar-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 18px 18px 12px 18px;
+  box-shadow: 0 2px 16px rgba(60, 72, 88, 0.08);
+}
+
+.leaves-calendar-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #7c3aed;
+}
+
+.leaves-calendar-subtitle {
+  margin-top: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.leaves-approved-leave {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.leaves-approved-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #a78bfa;
+}
+
+.leaves-approved-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.leaves-approved-date {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.leaves-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(60, 72, 88, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.leaves-modal {
+  background: #fff;
+  padding: 32px 28px 24px 28px;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(60, 72, 88, 0.18);
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.leaves-modal h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #7c3aed;
+}
+
+.leaves-modal-input {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #fff;
+  transition: border 0.2s;
+  margin-bottom: 0;
+}
+
+.leaves-modal-input:focus {
+  border-color: #7c3aed;
+  outline: none;
+}
+
+.leaves-modal-save {
+  background: linear-gradient(90deg, #5000d9 60%, #5000d9 100%);
+  color: #fff;
+  padding: 10px 0;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.leaves-modal-save:hover {
+  background: linear-gradient(90deg, #5000d9 60%, #5000d9 100%);
+}
+
+.leaves-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.leaves-cancel-btn {
+  background: #e5e7eb;
+  color: #374151;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.leaves-cancel-btn:hover {
+  background: #d1d5db;
+}

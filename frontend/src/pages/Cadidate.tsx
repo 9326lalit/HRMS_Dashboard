@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { FaEllipsisV } from 'react-icons/fa'
+import './Candidate.css' // Make sure to create this CSS file
 
 type Candidate = {
   id: number
@@ -39,13 +40,13 @@ export default function CandidatesPage() {
   const statusBadge = (status: string) => {
     switch (status) {
       case 'New':
-        return 'bg-gray-200 text-gray-800'
+        return 'status-badge new'
       case 'Selected':
-        return 'bg-blue-100 text-blue-600'
+        return 'status-badge selected'
       case 'Rejected':
-        return 'bg-red-100 text-red-600'
+        return 'status-badge rejected'
       default:
-        return 'bg-gray-100 text-gray-600'
+        return 'status-badge'
     }
   }
 
@@ -89,13 +90,13 @@ export default function CandidatesPage() {
   })
 
   return (
-    <div className="p-4 w-full">
-      <div className="flex flex-wrap justify-between items-center mb-4 gap-4">
-        <div className="flex gap-2">
+    <div className="candidate-container">
+      <div className="candidate-header">
+        <div className="candidate-filters">
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="border rounded px-3 py-2 text-sm"
+            className="candidate-select"
           >
             <option value="">All Status</option>
             <option>New</option>
@@ -104,8 +105,8 @@ export default function CandidatesPage() {
           </select>
           <select
             value={filterPosition}
-            onChange={(e) => setFilterPosition(e.target.value)}
-            className="border rounded px-3 py-2 text-sm"
+            onChange={(e) => setFilterPosition(e.target.value)}       
+            className="candidate-select"
           >
             <option value="">All Positions</option>
             <option>Developer</option>
@@ -115,16 +116,16 @@ export default function CandidatesPage() {
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="candidate-search-add">
           <input
             type="text"
             placeholder="Search by name/email"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border rounded px-3 py-2 text-sm"
+            className="candidate-input"
           />
           <button
-            className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800"
+            className="candidate-add-btn"
             onClick={() => setShowModal(true)}
           >
             Add Candidate
@@ -132,51 +133,52 @@ export default function CandidatesPage() {
         </div>
       </div>
 
-      <table className="w-full text-sm shadow rounded overflow-hidden border">
-        <thead className="bg-purple-700 text-white text-left">
+      <table className="candidate-table">
+        <thead>
           <tr>
-            <th className="p-3">Sr no.</th>
-            <th className="p-3">Name</th>
-            <th className="p-3">Email</th>
-            <th className="p-3">Phone</th>
-            <th className="p-3">Position</th>
-            <th className="p-3">Status</th>
-            <th className="p-3">Experience</th>
-            <th className="p-3">Action</th>
+            <th>Sr no.</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Experience</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {filteredCandidates.map((c, index) => (
-            <tr key={c.id} className="border-b hover:bg-gray-50">
-              <td className="p-3">{String(index + 1).padStart(2, '0')}</td>
-              <td className="p-3">{c.name}</td>
-              <td className="p-3">{c.email}</td>
-              <td className="p-3">{c.phone}</td>
-              <td className="p-3">{c.position}</td>
-              <td className="p-3">
+            <tr key={c.id}>
+              <td>{String(index + 1).padStart(2, '0')}</td>
+              <td>{c.name}</td>
+              <td>{c.email}</td>
+              <td>{c.phone}</td>
+              <td>{c.position}</td>
+              <td>
                 <select
                   value={c.status}
                   onChange={(e) => updateStatus(c.id, e.target.value)}
-                  className={`px-2 py-1 rounded text-xs font-medium ${statusBadge(c.status)}`}
+
+                  className={statusBadge(c.status)}
                 >
                   <option>New</option>
                   <option>Selected</option>
                   <option>Rejected</option>
                 </select>
               </td>
-              <td className="p-3">{c.experience}</td>
-              <td className="p-3 relative">
-                <button onClick={() => toggleMenu(c.id)}>
+              <td>{c.experience}</td>
+              <td className="candidate-action-cell">
+                <button className="candidate-action-btn" onClick={() => toggleMenu(c.id)}>
                   <FaEllipsisV />
                 </button>
                 {openMenuId === c.id && (
-                  <div className="absolute z-10 bg-white border shadow-md right-0 mt-2 w-40 rounded text-sm">
-                    <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                  <div className="candidate-action-menu">
+                    <button className="candidate-menu-item">
                       Download Resume
                     </button>
                     <button
                       onClick={() => handleDelete(c.id)}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                      className="candidate-menu-item candidate-menu-delete"
                     >
                       Delete Candidate
                     </button>
@@ -190,40 +192,40 @@ export default function CandidatesPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-blue bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded shadow-lg w-[400px]">
-            <h2 className="text-xl font-semibold mb-4">Add New Candidate</h2>
+        <div className="candidate-modal-overlay">
+          <div className="candidate-modal">
+            <h2>Add New Candidate</h2>
             <input
               type="text"
               placeholder="Name"
               value={newCandidate.name}
               onChange={(e) => setNewCandidate({ ...newCandidate, name: e.target.value })}
-              className="w-full border rounded px-3 py-2 mb-3"
+              className="candidate-input"
             />
             <input
               type="email"
               placeholder="Email"
               value={newCandidate.email}
               onChange={(e) => setNewCandidate({ ...newCandidate, email: e.target.value })}
-              className="w-full border rounded px-3 py-2 mb-3"
+              className="candidate-input"
             />
             <input
               type="tel"
               placeholder="Phone"
               value={newCandidate.phone}
               onChange={(e) => setNewCandidate({ ...newCandidate, phone: e.target.value })}
-              className="w-full border rounded px-3 py-2 mb-3"
+              className="candidate-input"
             />
-            <div className="flex justify-end gap-2">
+            <div className="candidate-modal-actions">
               <button
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                className="candidate-cancel-btn"
                 onClick={() => setShowModal(false)}
               >
                 Cancel
               </button>
               <button
                 onClick={handleAddCandidate}
-                className="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800"
+                className="candidate-save-btn"
               >
                 Save
               </button>
@@ -232,5 +234,4 @@ export default function CandidatesPage() {
         </div>
       )}
     </div>
-  )
-}
+  )}

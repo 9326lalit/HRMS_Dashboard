@@ -1,11 +1,7 @@
-
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,10 +13,9 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -33,10 +28,9 @@ export default function RegisterPage() {
     };
 
     try {
-      // Send data to the backend API for registration
       const response = await axios.post("https://hrmsbackend-27mf.onrender.com/api/users/register", userData);
       if (response.data.success) {
-        navigate("/login"); // Redirect to login page on success
+        navigate("/login");
       }
     } catch (err) {
       setError("An error occurred while registering. Please try again.");
@@ -45,76 +39,153 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-white via-gray-100 to-white p-4">
-      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 bg-white rounded-3xl shadow-xl overflow-hidden">
+    <div style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "linear-gradient(90deg, #fff 0%, #f3f4f6 50%, #fff 100%)",
+      padding: "24px"
+    }}>
+      <div style={{
+        width: "100%",
+        maxWidth: "1100px",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        background: "#fff",
+        borderRadius: "28px",
+        boxShadow: "0 6px 32px rgba(60,72,88,0.13)",
+        overflow: "hidden"
+      }}>
         {/* Left Section */}
-        <div className="bg-purple-800 text-white flex flex-col justify-center items-center px-10 py-16">
+        <div style={{
+          background: "#7c3aed",
+          color: "#fff",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "64px 32px"
+        }}>
           <img
             src="https://tse1.mm.bing.net/th?id=OIP.LLYDJcGU5mnVI2knzJjFVwHaFX&pid=Api&P=0&h=220"
             alt="Dashboard Preview"
-            className="rounded-lg shadow-lg mb-8"
+            style={{
+              borderRadius: "16px",
+              boxShadow: "0 4px 24px rgba(60,72,88,0.18)",
+              marginBottom: "32px",
+              width: "260px",
+              maxWidth: "100%"
+            }}
           />
-          <h2 className="text-2xl font-semibold text-center mb-2">
+          <h2 style={{
+            fontSize: "24px",
+            fontWeight: 600,
+            textAlign: "center",
+            marginBottom: "10px"
+          }}>
             Welcome to the Dashboard
           </h2>
-          <p className="text-sm text-center max-w-md">
+          <p style={{
+            fontSize: "15px",
+            textAlign: "center",
+            maxWidth: "340px",
+            margin: "0 auto"
+          }}>
             HRMS(Human Resource Management System) is a software solution that helps organizations manage their human resources effectively. It streamlines HR processes, improves employee engagement, and enhances overall productivity.
           </p>
-          <div className="flex space-x-1 mt-4">
-            <span className="w-2 h-2 bg-white rounded-full"></span>
-            <span className="w-2 h-2 bg-purple-600 rounded-full"></span>
-            <span className="w-2 h-2 bg-white rounded-full"></span>
+          <div style={{ display: "flex", gap: "6px", marginTop: "18px" }}>
+            <span style={{ width: "10px", height: "10px", background: "#fff", borderRadius: "50%" }}></span>
+            <span style={{ width: "10px", height: "10px", background: "#6d28d9", borderRadius: "50%" }}></span>
+            <span style={{ width: "10px", height: "10px", background: "#fff", borderRadius: "50%" }}></span>
           </div>
         </div>
 
         {/* Right Section */}
-        <div className="p-10">
-          <h2 className="text-2xl font-bold mb-6 text-center">Welcome to Dashboard</h2>
-          <form className="space-y-4" onSubmit={handleRegister}>
+        <div style={{
+          padding: "48px 36px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center"
+        }}>
+          <h2 style={{
+            fontSize: "24px",
+            fontWeight: "bold",
+            marginBottom: "28px",
+            textAlign: "center"
+          }}>Welcome to Dashboard</h2>
+          <form style={{ display: "flex", flexDirection: "column", gap: "18px" }} onSubmit={handleRegister}>
             {/* Full Name */}
-            <div>
-              <Label htmlFor="fullname" className="text-sm">
-                Full name<span className="text-red-500">*</span>
-              </Label>
-              <Input
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label htmlFor="fullname" style={{ fontSize: "15px", fontWeight: 500 }}>
+                Full name<span style={{ color: "#e11d48" }}>*</span>
+              </label>
+              <input
                 id="fullname"
                 placeholder="Full name"
                 required
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "6px",
+                  border: "1px solid #d1d5db",
+                  fontSize: "15px",
+                  background: "#fff"
+                }}
               />
             </div>
 
             {/* Email */}
-            <div>
-              <Label htmlFor="email" className="text-sm">
-                Email Address<span className="text-red-500">*</span>
-              </Label>
-              <Input
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label htmlFor="email" style={{ fontSize: "15px", fontWeight: 500 }}>
+                Email Address<span style={{ color: "#e11d48" }}>*</span>
+              </label>
+              <input
                 id="email"
                 placeholder="Email Address"
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "6px",
+                  border: "1px solid #d1d5db",
+                  fontSize: "15px",
+                  background: "#fff"
+                }}
               />
             </div>
 
             {/* Password */}
-            <div className="relative">
-              <Label htmlFor="password" className="text-sm">
-                Password<span className="text-red-500">*</span>
-              </Label>
-              <Input
+            <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label htmlFor="password" style={{ fontSize: "15px", fontWeight: 500 }}>
+                Password<span style={{ color: "#e11d48" }}>*</span>
+              </label>
+              <input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "6px",
+                  border: "1px solid #d1d5db",
+                  fontSize: "15px",
+                  background: "#fff"
+                }}
               />
               <div
-                className="absolute right-3 top-9 cursor-pointer text-gray-500"
+                style={{
+                  position: "absolute",
+                  right: "14px",
+                  top: "38px",
+                  cursor: "pointer",
+                  color: "#6b7280"
+                }}
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -122,20 +193,33 @@ export default function RegisterPage() {
             </div>
 
             {/* Confirm Password */}
-            <div className="relative">
-              <Label htmlFor="confirm-password" className="text-sm">
-                Confirm Password<span className="text-red-500">*</span>
-              </Label>
-              <Input
+            <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label htmlFor="confirm-password" style={{ fontSize: "15px", fontWeight: 500 }}>
+                Confirm Password<span style={{ color: "#e11d48" }}>*</span>
+              </label>
+              <input
                 id="confirm-password"
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "6px",
+                  border: "1px solid #d1d5db",
+                  fontSize: "15px",
+                  background: "#fff"
+                }}
               />
               <div
-                className="absolute right-3 top-9 cursor-pointer text-gray-500"
+                style={{
+                  position: "absolute",
+                  right: "14px",
+                  top: "38px",
+                  cursor: "pointer",
+                  color: "#6b7280"
+                }}
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -143,17 +227,34 @@ export default function RegisterPage() {
             </div>
 
             {/* Error Message */}
-            {error && <p className="text-red-500 text-center">{error}</p>}
+            {error && <p style={{ color: "#e11d48", textAlign: "center", margin: 0 }}>{error}</p>}
 
             {/* Register Button */}
-            <Button className="w-full bg-purple-800 hover:bg-purple-700 text-white">
+            <button
+              type="submit"
+              style={{
+                width: "100%",
+                background: "linear-gradient(90deg, #7c3aed 60%, #a78bfa 100%)",
+                color: "#fff",
+                padding: "12px 0",
+                border: "none",
+                borderRadius: "6px",
+                fontWeight: 600,
+                fontSize: "16px",
+                cursor: "pointer",
+                marginTop: "8px",
+                transition: "background 0.2s"
+              }}
+              onMouseOver={e => (e.currentTarget.style.background = "linear-gradient(90deg, #5b21b6 60%, #a78bfa 100%)")}
+              onMouseOut={e => (e.currentTarget.style.background = "linear-gradient(90deg, #7c3aed 60%, #a78bfa 100%)")}
+            >
               Register
-            </Button>
+            </button>
 
             {/* Login Link */}
-            <p className="text-sm text-center text-muted-foreground">
+            <p style={{ fontSize: "14px", textAlign: "center", color: "#6b7280", marginTop: "6px" }}>
               Already have an account?{" "}
-              <Link to="/login" className="text-purple-800 hover:underline">
+              <Link to="/login" style={{ color: "#7c3aed", textDecoration: "underline" }}>
                 Login
               </Link>
             </p>
@@ -163,5 +264,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-
-

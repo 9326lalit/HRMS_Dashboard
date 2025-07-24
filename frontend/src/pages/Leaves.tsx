@@ -5,6 +5,7 @@ import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import { AiOutlinePlus } from 'react-icons/ai';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import './Leaves.css';
 
 interface Leave {
   _id: string;
@@ -89,11 +90,11 @@ const Leave: React.FC = () => {
   );
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex gap-2">
+    <div className="leaves-container">
+      <div className="leaves-header">
+        <div className="leaves-filters">
           <select
-            className="border rounded px-3 py-1"
+            className="leaves-select"
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
           >
@@ -102,64 +103,64 @@ const Leave: React.FC = () => {
             <option value="Pending">Pending</option>
           </select>
           <input
-            className="border rounded px-3 py-1"
+            className="leaves-input"
             placeholder="Search by name"
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
         </div>
         <button
-          className="bg-purple-600 text-white px-4 py-2 rounded"
+          className="leaves-add-btn"
           onClick={handleAdd}
         >
-          <AiOutlinePlus className="inline mr-1" /> Add Leave
+          <AiOutlinePlus style={{ marginRight: 6, verticalAlign: 'middle' }} /> Add Leave
         </button>
       </div>
 
-      <div className="flex gap-6">
-        <div className="flex-1 overflow-x-auto">
-          <table className="min-w-full bg-white border">
-            <thead className="bg-purple-700 text-white">
+      <div className="leaves-main">
+        <div className="leaves-table-wrapper">
+          <table className="leaves-table">
+            <thead>
               <tr>
-                <th className="py-2 px-4">Profile</th>
-                <th className="py-2 px-4">Name</th>
-                <th className="py-2 px-4">Date</th>
-                <th className="py-2 px-4">Reason</th>
-                <th className="py-2 px-4">Status</th>
-                <th className="py-2 px-4">Action</th>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {filteredLeaves.map((leave, _id) => (
-                <tr key={leave._id} className="border-t">
-                  <td className="py-2 px-4">
-                    <img src={leave.image} alt={leave.name} className="w-10 h-10 rounded-full" />
+              {filteredLeaves.map((leave) => (
+                <tr key={leave._id}>
+                  <td>
+                    <img src={leave.image} alt={leave.name} className="leaves-avatar" />
                   </td>
-                  <td className="py-2 px-4">
-                    <p className="font-medium">{leave.name}</p>
-                    <p className="text-xs text-gray-500">{leave.role}</p>
+                  <td>
+                    <div className="leaves-name">{leave.name}</div>
+                    <div className="leaves-role">{leave.role}</div>
                   </td>
-                  <td className="py-2 px-4">{new Date(leave.date).toLocaleDateString()}</td>
-                  <td className="py-2 px-4">{leave.reason}</td>
-                  <td className="py-2 px-4">
-                    <span className={`px-2 py-1 rounded-full text-sm ${leave.status === 'Approved' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                  <td>{new Date(leave.date).toLocaleDateString()}</td>
+                  <td>{leave.reason}</td>
+                  <td>
+                    <span className={`leaves-status ${leave.status === 'Approved' ? 'approved' : 'pending'}`}>
                       {leave.status}
                     </span>
                   </td>
-                  <td className="py-2 px-4 relative">
-                    <button onClick={() => setShowDropdown(leave._id === showDropdown ? null : leave._id)}>
+                  <td className="leaves-action-cell">
+                    <button className="leaves-action-btn" onClick={() => setShowDropdown(leave._id === showDropdown ? null : leave._id)}>
                       <FaEllipsisV />
                     </button>
                     {showDropdown === leave._id && (
-                      <div className="absolute right-0 mt-2 bg-white border rounded shadow-md z-10">
+                      <div className="leaves-action-menu">
                         <button
-                          className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full"
+                          className="leaves-menu-item"
                           onClick={() => handleEdit(leave)}
                         >
                           <FiEdit /> Edit
                         </button>
                         <button
-                          className="flex items-center gap-2 px-4 py-2 hover:bg-red-100 w-full text-red-600"
+                          className="leaves-menu-item leaves-menu-delete"
                           onClick={() => handleDelete(leave._id)}
                         >
                           <FiTrash2 /> Delete
@@ -173,17 +174,17 @@ const Leave: React.FC = () => {
           </table>
         </div>
 
-        <div className="w-80">
-          <div className="bg-white border rounded-lg p-4">
-            <h2 className="font-semibold mb-2">Leave Calendar</h2>
-            <Calendar onChange={setSelectedDate} value={selectedDate} />
-            <h3 className="mt-4 font-medium">Approved Leaves</h3>
+        <div className="leaves-calendar-section">
+          <div className="leaves-calendar-card">
+            <h2 className="leaves-calendar-title">Leave Calendar</h2>
+            <Calendar onChange={()=>setSelectedDate} value={selectedDate} />
+            <h3 className="leaves-calendar-subtitle">Approved Leaves</h3>
             {leaves.filter(l => l.status === 'Approved').map(l => (
-              <div key={l._id} className="flex items-center mt-2">
-                <img src={l.image} alt={l.name} className="w-8 h-8 rounded-full mr-2" />
+              <div key={l._id} className="leaves-approved-leave">
+                <img src={l.image} alt={l.name} className="leaves-approved-avatar" />
                 <div>
-                  <p className="text-sm font-medium">{l.name}</p>
-                  <p className="text-xs text-gray-500">{new Date(l.date).toLocaleDateString()}</p>
+                  <div className="leaves-approved-name">{l.name}</div>
+                  <div className="leaves-approved-date">{new Date(l.date).toLocaleDateString()}</div>
                 </div>
               </div>
             ))}
@@ -192,48 +193,62 @@ const Leave: React.FC = () => {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 bg-blue bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-            <h2 className="text-lg font-semibold mb-4">{editingLeave ? 'Edit Leave' : 'Add Leave'}</h2>
-            <input
-              className="w-full border rounded px-3 py-2 mb-2"
-              placeholder="Name"
-              value={formData.name}
-              onChange={e => setFormData({ ...formData, name: e.target.value })}
-            />
-            <input
-              className="w-full border rounded px-3 py-2 mb-2"
-              placeholder="Role"
-              value={formData.role}
-              onChange={e => setFormData({ ...formData, role: e.target.value })}
-            />
-            <input
-              type="date"
-              className="w-full border rounded px-3 py-2 mb-2"
-              value={formData.date}
-              onChange={e => setFormData({ ...formData, date: e.target.value })}
-            />
-            <input
-              className="w-full border rounded px-3 py-2 mb-2"
-              placeholder="Reason"
-              value={formData.reason}
-              onChange={e => setFormData({ ...formData, reason: e.target.value })}
-            />
-            <input
-              className="w-full border rounded px-3 py-2 mb-2"
-              placeholder="Image URL"
-              value={formData.image}
-              onChange={e => setFormData({ ...formData, image: e.target.value })}
-            />
-            <button
-              className="bg-purple-600 text-white px-4 py-2 rounded w-full"
-              onClick={handleSubmit}
-            >
-              {editingLeave ? 'Update Leave' : 'Add Leave'}
-            </button>
-          </div>
-        </div>
-      )}
+  <div
+    className="leaves-modal-overlay"
+    onClick={() => setShowModal(false)}
+  >
+    <div
+      className="leaves-modal"
+      onClick={e => e.stopPropagation()}
+    >
+      <h2>{editingLeave ? 'Edit Leave' : 'Add Leave'}</h2>
+      <input
+        className="leaves-modal-input"
+        placeholder="Name"
+        value={formData.name}
+        onChange={e => setFormData({ ...formData, name: e.target.value })}
+      />
+      <input
+        className="leaves-modal-input"
+        placeholder="Role"
+        value={formData.role}
+        onChange={e => setFormData({ ...formData, role: e.target.value })}
+      />
+      <input
+        type="date"
+        className="leaves-modal-input"
+        value={formData.date}
+        onChange={e => setFormData({ ...formData, date: e.target.value })}
+      />
+      <input
+        className="leaves-modal-input"
+        placeholder="Reason"
+        value={formData.reason}
+        onChange={e => setFormData({ ...formData, reason: e.target.value })}
+      />
+      <input
+        className="leaves-modal-input"
+        placeholder="Image URL"
+        value={formData.image}
+        onChange={e => setFormData({ ...formData, image: e.target.value })}
+      />
+      <div className="leaves-modal-actions">
+        <button
+          className="leaves-cancel-btn"
+          onClick={() => setShowModal(false)}
+        >
+          Cancel
+        </button>
+        <button
+          className="leaves-modal-save"
+          onClick={handleSubmit}
+        >
+          {editingLeave ? 'Update Leave' : 'Add Leave'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

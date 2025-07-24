@@ -5,32 +5,54 @@ const Logout: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Clear localStorage/sessionStorage or any auth data
     localStorage.clear();
     sessionStorage.clear();
-
-    // Redirect to login page after short delay
     const timer = setTimeout(() => {
       navigate('/login');
     }, 1000);
-
     return () => clearTimeout(timer);
   }, [navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md text-center">
-        <h2 className="text-xl font-semibold mb-2">Logging you out...</h2>
-        <p className="text-gray-600">Please wait while we redirect you.</p>
-        <div className="mt-4">
+    <div style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "#f3f4f6"
+    }}>
+      <div style={{
+        background: "#fff",
+        padding: "36px 32px",
+        borderRadius: "14px",
+        boxShadow: "0 4px 24px rgba(60,72,88,0.13)",
+        textAlign: "center",
+        minWidth: "320px"
+      }}>
+        <h2 style={{
+          fontSize: "22px",
+          fontWeight: 600,
+          marginBottom: "10px"
+        }}>Logging you out...</h2>
+        <p style={{ color: "#6b7280", fontSize: "15px" }}>
+          Please wait while we redirect you.
+        </p>
+        <div style={{ marginTop: "22px" }}>
           <svg
-            className="animate-spin h-6 w-6 text-purple-600 mx-auto"
+            style={{
+              animation: "spin 1s linear infinite",
+              height: "36px",
+              width: "36px",
+              color: "#7c3aed",
+              display: "block",
+              margin: "0 auto"
+            }}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
           >
             <circle
-              className="opacity-25"
+              style={{ opacity: 0.25 }}
               cx="12"
               cy="12"
               r="10"
@@ -38,12 +60,20 @@ const Logout: React.FC = () => {
               strokeWidth="4"
             ></circle>
             <path
-              className="opacity-75"
+              style={{ opacity: 0.75 }}
               fill="currentColor"
               d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4l-3 3 3 3H4z"
             ></path>
           </svg>
         </div>
+        <style>
+          {`
+            @keyframes spin {
+              0% { transform: rotate(0deg);}
+              100% { transform: rotate(360deg);}
+            }
+          `}
+        </style>
       </div>
     </div>
   );
