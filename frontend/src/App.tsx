@@ -1,6 +1,6 @@
 
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 
 import RegisterPage from './auth/Register';
 import LoginPage from './auth/Login';
@@ -71,7 +71,6 @@ export default function App() {
             element={<ProtectedRoute><Attendance /></ProtectedRoute>}
           />
 
-          {/* You can add more routes here */}
         </Routes>
       </div>
     </div>
