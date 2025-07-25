@@ -15,7 +15,7 @@ export default function LoginPage() {
     try {
       const response = await axios.post("https://hrmsbackend-27mf.onrender.com/api/users/login", { email, password })
       localStorage.setItem("token", response.data.token)
-      navigate("/candidates")
+      navigate("/")
     } catch (err) {
       setError("Invalid credentials, please try again.")
     }
