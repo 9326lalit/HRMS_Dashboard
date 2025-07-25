@@ -5,8 +5,12 @@
   "type": "module",
   "scripts": {
   "dev": "vite",
-  "build": "echo '⚠️ Build skipped on Vercel'",
-  "preview": "vite preview"
+    "start": "npm run lint && npm run dev",
+    "build": "vite build",
+    "lint": "eslint .",
+  "postinstall": "npx puppeteer browsers install chrome",
+    "preview": "vite preview",
+    "vercel-build": "echo 'No build step required'"
 }
 ,
   "dependencies": {
